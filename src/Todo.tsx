@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import './App.css'
 import { TodoList } from './TodoList'
 import type { ITodo } from './types';
+import { Footer } from './Footer';
 
 const Todo = () => {
 
@@ -31,6 +31,8 @@ const Todo = () => {
     todos.forEach(todo => (todo.isCompleted = !todo.isCompleted))
     setTodos([...todos])
   }
+  const urlHashToFilter = (hash: string) => hash.split('/')[1] || 'all';
+  const [activeFilter, setActiveFilter] = useState(urlHashToFilter(window.location.hash || '#/'));
 
   return (
     <>
@@ -46,11 +48,16 @@ const Todo = () => {
       </header>
       <TodoList
         todos={todos}
+        activeFilter={activeFilter}
         onRemove={handleRemove}
         onToggleCompletion={handleToggleCompletion}
         onToggleAll={handleToggleAll}
       />
-      <footer className='footer' />
+      <Footer
+        todos={todos}
+        activeFilter={activeFilter}
+        setActiveFilter={setActiveFilter}
+      />
     </>
   )
 }

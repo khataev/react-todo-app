@@ -1,4 +1,3 @@
-import './App.css'
 import type { ITodo } from './types';
 
 export interface IParams {
