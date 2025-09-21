@@ -1,12 +1,13 @@
 import type { ITodo } from "./types"
 
 interface IParams {
+  todos: Array<ITodo>
   activeFilter: string,
   setActiveFilter: (filter: string) => void;
-  todos: Array<ITodo>
+  onCompleteAll: () => void;
 }
 
-export const Footer = ({ todos, activeFilter, setActiveFilter }: IParams) => {
+export const Footer = ({ todos, activeFilter, setActiveFilter, onCompleteAll }: IParams) => {
   if (todos.length == 0) return;
 
   const activeItems = todos.filter(item => !item.isCompleted)
@@ -21,7 +22,7 @@ export const Footer = ({ todos, activeFilter, setActiveFilter }: IParams) => {
         <li><a className={activeFilter === 'active' ? 'selected' : undefined} href='#/active' onClick={() => setActiveFilter('active')}>Active</a></li>
         <li><a className={activeFilter === 'completed' ? 'selected' : undefined} href='#/completed' onClick={() => setActiveFilter('completed')}>Completed</a></li>
       </ul>
-      <button className='clear-completed'>Clear completed</button>
+      <button className='clear-completed' onClick={onCompleteAll}>Clear completed</button>
     </footer>
   )
 }
