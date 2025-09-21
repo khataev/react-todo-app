@@ -1,24 +1,30 @@
 import './App.css'
-import { TodoItem, type ITodo } from './TodoItem'
+import { TodoItem } from './TodoItem'
+import { Toggle } from './Toggle';
+import { type ITodo } from './types'
 
+interface IParams {
+  todos: Array<ITodo>;
+  onRemove: (id: string) => void;
+  onToggleCompletion: (id: string) => void;
+  onToggleAll: () => void;
+}
 
-interface IParams { todos: Array<ITodo>, destroyTodo: (id: string) => void }
-
-const TodoList = ({ todos, destroyTodo }: IParams) => {
+export const TodoList = ({ todos, onRemove, onToggleCompletion, onToggleAll }: IParams) => {
   return (
     <main className='main'>
-      <ul className='todo-list'>
-        {
-          todos.map((todo, index) => {
+      <Toggle visible={todos.length > 0} onClick={onToggleAll} />
 
-            return <TodoItem
-              key={index}
-              todo={todo}
-              handleDestroy={destroyTodo} />
-          })}
+      <ul className='todo-list'>
+        {todos.map((todo, index) => (
+          <TodoItem
+            key={index}
+            todo={todo}
+            onRemove={onRemove}
+            onToggleCompletion={onToggleCompletion}
+          />
+        ))}
       </ul>
     </main>
   )
 }
-
-export { TodoList }

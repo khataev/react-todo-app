@@ -1,20 +1,22 @@
 import './App.css'
+import type { ITodo } from './types';
 
-export interface ITodo { id: string, text: string }
-export interface IParams { todo: ITodo, handleDestroy: (id: string) => void }
-
-function TodoItem({ todo, handleDestroy }: IParams) {
-  const { id, text } = todo;
-
-  return (
-    <li>
-      <div className='view'>
-        <input className='toggle' type='checkbox' />
-        <label>{text}</label>
-        <button className='destroy' onClick={() => handleDestroy(id)} />
-      </div>
-    </li>
-  )
+export interface IParams {
+  todo: ITodo;
+  onRemove: (id: string) => void;
+  onToggleCompletion: (id: string) => void
 }
 
-export { TodoItem }
+export function TodoItem({ todo, onRemove, onToggleCompletion }: IParams) {
+  const { id, text, isCompleted } = todo;
+
+  return (
+    <li className={isCompleted ? 'completed' : undefined} >
+      <div className='view'>
+        <input className='toggle' type='checkbox' onClick={() => onToggleCompletion(id)} />
+        <label>{text}</label>
+        <button className='destroy' onClick={() => onRemove(id)} />
+      </div>
+    </li >
+  )
+}
