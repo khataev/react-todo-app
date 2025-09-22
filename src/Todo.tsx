@@ -28,9 +28,12 @@ const Todo = () => {
     setTodos([...todos])
   }
   const handleToggleAll = () => {
-    todos.forEach(todo => (todo.isCompleted = !todo.isCompleted))
+    if (todos.every(todo => todo.isCompleted)) todos.forEach(todo => (todo.isCompleted = false))
+    else todos.forEach(todo => (todo.isCompleted = true))
+
     setTodos([...todos])
   }
+
   const handleCompleteAll = () => setTodos([]);
   const urlHashToFilter = (hash: string) => hash.split('/')[1] || 'all';
   const [activeFilter, setActiveFilter] = useState(urlHashToFilter(window.location.hash || '#/'));

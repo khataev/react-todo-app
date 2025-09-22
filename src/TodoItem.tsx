@@ -12,7 +12,7 @@ export function TodoItem({ todo, onRemove, onToggleCompletion }: IParams) {
   return (
     <li className={isCompleted ? 'completed' : undefined} >
       <div className='view'>
-        <input className='toggle' type='checkbox' onClick={() => onToggleCompletion(id)} defaultChecked={todo.isCompleted} />
+        <input className='toggle' type='checkbox' onChange={() => onToggleCompletion(id)} checked={todo.isCompleted} />
         <label>{text}</label>
         <button className='destroy' onClick={() => onRemove(id)} />
       </div>
