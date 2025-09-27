@@ -10,6 +10,11 @@ const Todo = () => {
   const [todos, setTodos] = useState<Array<ITodo>>([]);
   const [activeFilter, setActiveFilter] = useState(urlHashToFilter(window.location.hash || '#/'));
 
+  const onAddTodo = (text: string) => {
+    const newTodo = { id: crypto.randomUUID(), text, isCompleted: false };
+    setTodos([newTodo, ...todos]);
+  }
+
   const handleRemove = (id: string) => {
     const newTodos = todos.filter(todo => todo.id !== id);
     setTodos(newTodos);
@@ -34,7 +39,7 @@ const Todo = () => {
     <>
       <header className='header'>
         <h1>todos</h1>
-        <NewTodoInput todos={todos} setTodos={setTodos} />
+        <NewTodoInput onAddTodo={onAddTodo} />
       </header>
       <TodoList
         todos={todos}
