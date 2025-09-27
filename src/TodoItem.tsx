@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { TodoItemView } from './TodoItemView';
 import type { ITodo } from './types';
-import { TodoInput } from './TodoInput';
-
-export interface IParams {
+import { EditTodoInput } from './EditTodoInput';
+interface IParams {
   todo: ITodo;
+  todos: Array<ITodo>;
   onRemove: (id: string) => void;
   onToggleCompletion: (id: string) => void
-
-  // For TodoInput
-  todos: Array<ITodo>;
   setTodos: (todos: Array<ITodo>) => void;
 }
 
@@ -17,18 +14,13 @@ export const TodoItem = ({ todo, onRemove, onToggleCompletion, todos, setTodos }
   const [isEdit, setIsEdit] = useState(false);
 
   const onEnterEditMode = () => setIsEdit(true);
-  const onLeaveEditMode = () => setIsEdit(false);
+  const onLeaveEditMode = (newValue: string) => {
+    todo.text = newValue;
+    setTodos([...todos]);
+    setIsEdit(false);
+  };
 
-  if (isEdit) return (
-    <TodoInput
-      isEditMode={isEdit}
-      todos={todos}
-      todo={todo}
-      setTodos={setTodos}
-      defaultValue={todo.text}
-      onLeaveEditMode={onLeaveEditMode}
-    />
-  )
+  if (isEdit) return <EditTodoInput currentValue={todo.text} onLeaveEditMode={onLeaveEditMode} />;
 
   return (
     <TodoItemView

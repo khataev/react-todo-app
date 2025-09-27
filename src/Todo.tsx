@@ -3,7 +3,7 @@ import { TodoList } from './TodoList'
 import type { ITodo } from './types';
 import { Footer } from './Footer';
 import { urlHashToFilter } from './utils';
-import { TodoInput } from './TodoInput';
+import { NewTodoInput } from './NewTodoInput';
 
 
 const Todo = () => {
@@ -34,12 +34,7 @@ const Todo = () => {
     <>
       <header className='header'>
         <h1>todos</h1>
-        <TodoInput
-          isEditMode={false}
-          placeholder='What needs to be done?'
-          todos={todos}
-          setTodos={setTodos}
-        />
+        <NewTodoInput todos={todos} setTodos={setTodos} />
       </header>
       <TodoList
         todos={todos}
