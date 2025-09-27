@@ -13,7 +13,7 @@ export const TodoItemView = ({ todo, onRemove, onToggleCompletion, onEnterEditMo
   return (
     <li className={isCompleted ? 'completed' : undefined} onDoubleClick={onEnterEditMode}>
       <div className='view'>
-        <input className='toggle' type='checkbox' onChange={() => onToggleCompletion(id)} checked={todo.isCompleted} />
+        <input className='toggle' type='checkbox' onChange={() => onToggleCompletion(id)} checked={isCompleted} />
         <label>{text}</label>
         <button className='destroy' onClick={() => onRemove(id)} />
       </div>

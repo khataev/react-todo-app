@@ -33,7 +33,7 @@ const Todo = () => {
 
     setTodos([...todos])
   }
-  const handleCompleteAll = () => setTodos([]);
+  const handleClearCompleted = () => setTodos(todos.filter(todo => !todo.isCompleted));
 
   return (
     <>
@@ -53,7 +53,7 @@ const Todo = () => {
         todos={todos}
         activeFilter={activeFilter}
         setActiveFilter={setActiveFilter}
-        onCompleteAll={handleCompleteAll}
+        onClearCompleted={handleClearCompleted}
       />
     </>
   )
