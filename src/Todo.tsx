@@ -51,6 +51,20 @@ const Todo = () => {
     if (e.type === 'click' && target.dataset.name === 'toggle-toggle-all-label') {
       handleToggleAll();
     }
+    // Change filter
+    if (e.type === 'click' && target.dataset.name?.startsWith('footer-filter-all')) {
+      setActiveFilter('all');
+    }
+    if (e.type === 'click' && target.dataset.name?.startsWith('footer-filter-active')) {
+      setActiveFilter('active');
+    }
+    if (e.type === 'click' && target.dataset.name?.startsWith('footer-filter-completed')) {
+      setActiveFilter('completed');
+    }
+    // Clear completed
+    if (e.type === 'click' && target.dataset.name === 'footer-clear-completed') {
+      handleClearCompleted();
+    }
   }
   return (
     <div onClick={mainHandler} onChange={mainHandler}>
@@ -66,8 +80,6 @@ const Todo = () => {
       <Footer
         todos={todos}
         activeFilter={activeFilter}
-        setActiveFilter={setActiveFilter}
-        onClearCompleted={handleClearCompleted}
       />
     </div>
   )
