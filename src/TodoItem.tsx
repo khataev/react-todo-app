@@ -5,12 +5,10 @@ import { EditTodoInput } from './EditTodoInput';
 interface IParams {
   todo: ITodo;
   todos: Array<ITodo>;
-  onRemove: (id: string) => void;
-  onToggleCompletion: (id: string) => void
   setTodos: (todos: Array<ITodo>) => void;
 }
 
-export const TodoItem = ({ todo, onRemove, onToggleCompletion, todos, setTodos }: IParams) => {
+export const TodoItem = ({ todo, todos, setTodos }: IParams) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const onEnterEditMode = () => setIsEdit(true);
@@ -25,8 +23,6 @@ export const TodoItem = ({ todo, onRemove, onToggleCompletion, todos, setTodos }
   return (
     <TodoItemView
       todo={todo}
-      onRemove={onRemove}
-      onToggleCompletion={onToggleCompletion}
       onEnterEditMode={onEnterEditMode}
     />
   )

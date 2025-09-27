@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type SyntheticEvent } from 'react'
 import { TodoList } from './TodoList'
 import type { ITodo } from './types';
 import { Footer } from './Footer';
@@ -35,8 +35,21 @@ const Todo = () => {
   }
   const handleClearCompleted = () => setTodos(todos.filter(todo => !todo.isCompleted));
 
+  const mainHandler = (e: SyntheticEvent) => {
+    const target = e.target as HTMLElement;
+    // Remove todo
+    if (e.type === 'click' && target.dataset.name === 'todo-item-view-destroy') {
+      const id = target.dataset.id;
+      if (id) handleRemove(id);
+    }
+    // Toggle todo completion
+    if (e.type === 'change' && target.dataset.name === 'todo-item-view-toggle') {
+      const id = target.dataset.id;
+      if (id) handleToggleCompletion(id);
+    }
+  }
   return (
-    <>
+    <div onClick={mainHandler} onChange={mainHandler}>
       <header className='header'>
         <h1>todos</h1>
         <NewTodoInput onAddTodo={onAddTodo} />
@@ -44,8 +57,6 @@ const Todo = () => {
       <TodoList
         todos={todos}
         activeFilter={activeFilter}
-        onRemove={handleRemove}
-        onToggleCompletion={handleToggleCompletion}
         onToggleAll={handleToggleAll}
         setTodos={setTodos}
       />
@@ -55,7 +66,7 @@ const Todo = () => {
         setActiveFilter={setActiveFilter}
         onClearCompleted={handleClearCompleted}
       />
-    </>
+    </div>
   )
 }
 
