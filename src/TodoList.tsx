@@ -5,7 +5,6 @@ import { type ITodo } from './types'
 interface IParams {
   todos: Array<ITodo>;
   activeFilter: string;
-  onToggleAll: () => void;
   setTodos: (todos: Array<ITodo>) => void;
 }
 
@@ -15,12 +14,12 @@ const filterMap: Record<string, (item: ITodo) => boolean> = {
   completed: (item) => item.isCompleted
 }
 
-export const TodoList = ({ todos, activeFilter, onToggleAll, setTodos }: IParams) => {
+export const TodoList = ({ todos, activeFilter, setTodos }: IParams) => {
   const filterPredicate = filterMap[activeFilter];
 
   return (
     <main className='main'>
-      <Toggle visible={todos.length > 0} onClick={onToggleAll} />
+      <Toggle visible={todos.length > 0} />
 
       <ul className='todo-list'>
         {todos.map((todo, index) => {

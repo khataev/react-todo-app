@@ -47,6 +47,10 @@ const Todo = () => {
       const id = target.dataset.id;
       if (id) handleToggleCompletion(id);
     }
+    // Toggle all todos completion
+    if (e.type === 'click' && target.dataset.name === 'toggle-toggle-all-label') {
+      handleToggleAll();
+    }
   }
   return (
     <div onClick={mainHandler} onChange={mainHandler}>
@@ -57,7 +61,6 @@ const Todo = () => {
       <TodoList
         todos={todos}
         activeFilter={activeFilter}
-        onToggleAll={handleToggleAll}
         setTodos={setTodos}
       />
       <Footer

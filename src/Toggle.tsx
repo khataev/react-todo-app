@@ -1,15 +1,14 @@
 export interface IParams {
   visible: boolean;
-  onClick: () => void;
 }
 
-export const Toggle = ({ visible, onClick }: IParams) => {
+export const Toggle = ({ visible }: IParams) => {
   if (!visible) return null;
 
   return (
-    <div className='toggle-all-container' onClick={onClick}>
+    <div className='toggle-all-container'>
       <input className='toggle-all' type='checkbox' />
-      <label className='toggle-all-label' />
+      <label className='toggle-all-label' data-name='toggle-toggle-all-label' />
     </div>
   );
 }
