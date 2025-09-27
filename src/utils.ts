@@ -1,0 +1,1 @@
+export const urlHashToFilter = (hash: string) => hash.split('/')[1] || 'all';

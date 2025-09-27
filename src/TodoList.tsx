@@ -8,6 +8,7 @@ interface IParams {
   onRemove: (id: string) => void;
   onToggleCompletion: (id: string) => void;
   onToggleAll: () => void;
+  setTodos: (todos: Array<ITodo>) => void;
 }
 
 const filterMap: Record<string, (item: ITodo) => boolean> = {
@@ -16,7 +17,7 @@ const filterMap: Record<string, (item: ITodo) => boolean> = {
   completed: (item) => item.isCompleted
 }
 
-export const TodoList = ({ todos, activeFilter, onRemove, onToggleCompletion, onToggleAll }: IParams) => {
+export const TodoList = ({ todos, activeFilter, onRemove, onToggleCompletion, onToggleAll, setTodos }: IParams) => {
   const filterPredicate = filterMap[activeFilter];
 
   return (
@@ -32,6 +33,9 @@ export const TodoList = ({ todos, activeFilter, onRemove, onToggleCompletion, on
             todo={todo}
             onRemove={onRemove}
             onToggleCompletion={onToggleCompletion}
+
+            todos={todos}
+            setTodos={setTodos}
           />
         })}
       </ul>
